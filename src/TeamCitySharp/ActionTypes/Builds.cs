@@ -42,7 +42,7 @@ namespace TeamCitySharp.ActionTypes
 
             if (parameters != null)
             {
-                var paramQueryString = parameters.AllKeys.Select(key => string.Format("{0}={1}", key, parameters[key])).ToArray();
+                var paramQueryString = parameters.AllKeys.Select(key => string.Format("name={0}&value={1}", key, parameters[key])).ToArray();
 
                 url = string.Format("{0}&{1}", url, string.Join("&", paramQueryString));
             }
