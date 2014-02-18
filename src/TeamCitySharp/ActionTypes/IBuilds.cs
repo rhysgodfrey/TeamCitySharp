@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using TeamCitySharp.DomainEntities;
 using TeamCitySharp.Locators;
 
@@ -23,6 +24,6 @@ namespace TeamCitySharp.ActionTypes
         List<Build> NonSuccessfulBuildsForUser(string userName);
         List<Build> ByBranch(string branchName);
         Build LastBuildByAgent(string agentName);
-        void Add2QueueBuildByBuildConfigId(string buildConfigId);
+        void Add2QueueBuildByBuildConfigId(string buildConfigId, NameValueCollection parameters = null);
     }
 }

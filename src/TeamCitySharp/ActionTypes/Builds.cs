@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
 using TeamCitySharp.Connection;
 using TeamCitySharp.DomainEntities;
 using TeamCitySharp.Locators;
@@ -34,9 +36,18 @@ namespace TeamCitySharp.ActionTypes
                                             )).SingleOrDefault();
         }
 
-        public void Add2QueueBuildByBuildConfigId(string buildConfigId)
+        public void Add2QueueBuildByBuildConfigId(string buildConfigId, NameValueCollection parameters = null)
         {
-            _caller.GetFormat("/action.html?add2Queue={0}", buildConfigId);
+            var url = string.Format("/action.html?add2Queue={0}", buildConfigId);
+
+            if (parameters != null)
+            {
+                var paramQueryString = parameters.AllKeys.Select(key => string.Format("{0}={1}", key, parameters[key])).ToArray();
+
+                url = string.Format("{0}&{1}", url, string.Join("&", paramQueryString));
+            }
+
+            _caller.GetFormat(url);
         }
 
         public List<Build> SuccessfulBuildsByBuildConfigId(string buildConfigId)
