@@ -10,6 +10,13 @@ namespace TeamCitySharp.Locators
         ERROR
     }
 
+    public enum LimitTo
+    {
+        TRUE,
+        FALSE,
+        ANY
+    }
+
     public class BuildLocator
     {
         public static BuildLocator WithId(long id)
@@ -24,17 +31,17 @@ namespace TeamCitySharp.Locators
 
         public static BuildLocator RunningBuilds()
         {
-            return new BuildLocator {Running = true};
+            return new BuildLocator {Running = LimitTo.TRUE };
         }
 
         public static BuildLocator WithDimensions(BuildTypeLocator buildType = null,
                                                   UserLocator user = null,
                                                   string agentName = null,
                                                   BuildStatus? status = null,
-                                                  bool? personal = null,
-                                                  bool? canceled = null,
-                                                  bool? running = null,
-                                                  bool? pinned = null,
+                                                  LimitTo? personal = null,
+                                                  LimitTo? canceled = null,
+                                                  LimitTo? running = null,
+                                                  LimitTo? pinned = null,
                                                   int? maxResults = null,
                                                   int? startIndex = null,
                                                   BuildLocator sinceBuild = null,
@@ -70,10 +77,10 @@ namespace TeamCitySharp.Locators
         public string AgentName { get; private set; }
         public BuildStatus? Status { get; private set; }
         public BuildLocator SinceBuild { get; private set; }
-        public bool? Personal { get; private set; }
-        public bool? Canceled { get; private set; }
-        public bool? Running { get; private set; }
-        public bool? Pinned { get; private set; }
+        public LimitTo? Personal { get; private set; }
+        public LimitTo? Canceled { get; private set; }
+        public LimitTo? Running { get; private set; }
+        public LimitTo? Pinned { get; private set; }
         public int? MaxResults { get; private set; }
         public int? StartIndex { get; private set; }
         public DateTime? SinceDate { get; private set; }
